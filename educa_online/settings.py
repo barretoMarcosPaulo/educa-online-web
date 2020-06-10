@@ -22,8 +22,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # MY APPS
+    'apps.accounts',
+    'apps.core',
+    'apps.school',
 
-    'apps.accounts'
+    # THIRD
+    'widget_tweaks'
 ]
 
 MIDDLEWARE = [
@@ -41,7 +45,9 @@ ROOT_URLCONF = 'educa_online.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
