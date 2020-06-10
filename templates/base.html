@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+{% load widget_tweaks %}
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>EducaOnline</title>
+    <link rel="shortcut icon" href="{% static 'assets/logo.svg' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/fontawesome-free-5.13.0/css/all.min.css' %}">
+    {% block style %}{% endblock %}
+</head>
+
+<body>
+    <header class="header bg-black">
+        <a href="#" class="logo">EDUCA<span>ONLINE</span></a>
+    </header>
+
+    <div class="content">
+        
+        {% block body %}{% endblock %}
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,234 @@
+@import url(http://fonts.googleapis.com/css?family=Ruda:400,700,900);
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+ul li{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+    outline: none;
+    color: black;
+}
+
+body{
+    color: #797979;
+	background: #eaeaea;
+    font-family: 'Ruda', sans-serif;
+    padding: 0px !important;
+    margin: 0px !important;
+    font-size:13px;
+}
+
+input,button,label{
+    font-family: 'Ruda', sans-serif;
+}
+
+/* header */
+.header{
+    padding: 15px;
+}
+
+.header .logo{
+    color: white;
+    font-size: 25px;
+    font-weight: 900;
+}
+.header .logo span{
+    color: #ffcf00;
+}
+/* ---- */
+
+
+/* Content */
+.content{
+    position: fixed;
+    width: 100%;
+    min-height: 100vh;
+    /* background-image: url('../assets/bg-books2.jpg'); */
+    /* background-image: url('../assets/bg-head.jpg'); */
+    /* background-image: url('../assets/bg-books.jpg'); */
+    background-image: url('../assets/background-lamp.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: left;
+    }
+
+/* ---- */
+
+
+/* cards */
+.box-cards{
+    background-color: white;
+    border-radius: 5px;
+    max-width: 100%;
+    margin: 5% auto;
+    padding: 25px;
+    overflow: auto;
+    max-height: 70vh;
+    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.5);
+}
+
+.card-size70{
+    width: 60%;
+}
+.card-size80{
+    width: 80%;
+}
+
+
+h3{
+    color: gray;
+    font-weight: 900;
+    font-size: 30px;
+    display: inline; 
+}
+
+
+.box-cards .group-cards{
+    /* border: solid 1px red; */
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
+    justify-content: center;
+    padding-top: 2%;
+    
+}
+
+.box-cards .card{
+    cursor: pointer;
+    border: solid 1px gray;
+    text-align: center;
+    margin-right: 4%;
+    margin-bottom: 5%;
+    font-size: 21px;
+    color: gray;
+    border-radius: 5px;
+    padding: 40px;
+    transition: background-color 0.3s, padding 1s, border 1s;
+}
+
+.card label:hover{
+    cursor: pointer;
+}
+
+.box-cards .card:hover{
+    background-color: black;
+    opacity: 0.5;
+    color: whitesmoke;
+}
+
+/* backgrounds */
+.bg-black{
+    background: #22242a;
+    border-bottom: 1px solid #393d46;
+}
+
+/* ---- */
+
+
+.table{
+    text-align: left;    
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 3%;
+}
+
+.box-search{
+    margin-top: 4%;
+}
+.box-search input{
+    width: 18%;
+}
+.box-search button{
+    cursor: pointer;
+}
+
+.box-search input,button{
+    padding: 3px;
+    font-size: 12px;
+}
+
+
+
+.table th{
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.table td{
+    font-size: 15px;
+    max-width: 100px;
+}
+
+.table td{
+    padding: 8px;
+}
+
+.box-cards h3,img{
+    display: inline;
+}
+
+.button-add{
+    float: right;
+    border: solid 1px rgb(98, 194, 98);
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgb(98, 194, 98);
+    color: white;
+}
+
+
+.row{
+    display: flex;
+    flex-direction: row;
+}
+
+.form{
+    width: 90%;
+    margin: 3% auto;
+}
+
+.form .label-title{
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.form p{
+    margin-top: 15px;
+}
+
+.form .form-input{
+    font-size: 15px;
+    height: 30px;
+    width: 90%;
+    padding-left: 8px;
+    margin-top: 5px;
+    border-radius: 3px;
+    border: solid 1px gray;
+    outline: none;
+}
+
+.form .row div{
+    width: 50%;
+}
+
+.form .checkboxs{
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+}
+
+.checkboxs{
+    font-size: 18px;
+}
+.button-add{
+    float: right;
+    border: solid 1px rgb(98, 194, 98);
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgb(98, 194, 98);
+    color: white;
+    cursor: pointer;
+}
