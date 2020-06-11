@@ -1,1 +1,51 @@
 {% extends 'base.html' %}
+{% block subtitle %}| Painel da escola{% endblock %}
+{% block body %}
+
+
+    <div class="dashboard card-size70">
+        <div class="group-cards">
+
+            <a href="teachers_list.html">
+                <div class="card">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <br>
+                    <label>Professores</label>
+                </div>
+            </a>
+            <div class="card">
+                <i class="fas fa-child"></i>
+                <br>
+                <label>Alunos</label>
+            </div>
+
+            <div class="card">
+                <i class="fas fa-th-list"></i>
+                <br>
+                <label>Matérias</label>
+            </div>
+
+            <div class="card">
+                <i class="fas fa-th-large"></i>
+                <br>
+                <label>Turmas</label>
+            </div>
+
+
+            <div class="card">
+                <i class="fas fa-book"></i>
+                <br>
+                <label>Atividades</label>
+            </div>
+
+            <div class="card">
+                <i class="fas fa-book-reader"></i>
+                <br>
+                <label>Provas</label>
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}

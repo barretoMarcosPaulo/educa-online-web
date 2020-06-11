@@ -55,9 +55,15 @@ input,button,label{
     background-repeat: no-repeat;
     background-size: cover;
     background-position: left;
-    }
+}
+
 
 /* ---- */
+
+
+/* Dashboard */
+
+
 
 
 /* cards */
@@ -71,6 +77,16 @@ input,button,label{
     max-height: 70vh;
     box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.5);
 }
+
+.dashboard{
+    border-radius: 5px;
+    max-width: 100%;
+    margin: 5% auto;
+    padding: 25px;
+    overflow: auto;
+    max-height: 70vh;
+}
+
 
 .card-size70{
     width: 60%;
@@ -88,7 +104,7 @@ h3{
 }
 
 
-.box-cards .group-cards{
+.dashboard .group-cards{
     /* border: solid 1px red; */
     display: grid;
     grid-template-columns: 30% 30% 30%;
@@ -97,7 +113,7 @@ h3{
     
 }
 
-.box-cards .card{
+.dashboard .card{
     cursor: pointer;
     border: solid 1px gray;
     text-align: center;
@@ -108,15 +124,16 @@ h3{
     border-radius: 5px;
     padding: 40px;
     transition: background-color 0.3s, padding 1s, border 1s;
+    background-color: white;
 }
 
 .card label:hover{
     cursor: pointer;
 }
 
-.box-cards .card:hover{
+.dashboard .card:hover{
     background-color: black;
-    opacity: 0.5;
+    opacity: 0.85;
     color: whitesmoke;
 }
 
