@@ -103,7 +103,13 @@ h3{
     display: inline; 
 }
 
-
+.dashboard .group-cards2X2{
+    display: grid;
+    grid-template-columns: 30% 30%;
+    justify-content: center;
+    padding-top: 2%;
+    
+}
 .dashboard .group-cards{
     /* border: solid 1px red; */
     display: grid;
