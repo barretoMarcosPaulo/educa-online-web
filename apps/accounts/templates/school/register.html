@@ -1,0 +1,203 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block subtitle %}| Cadastro da escola{% endblock %}
+
+{% block body %}
+    <br>
+    <div class="box-cards col-md-6">
+    
+        <h3>Cadastrar da Escola</h3>
+        {{ form.error}}
+        {{ form.errors}}
+        <form method="POST" style="margin-top: 3%;"> {% csrf_token %}
+
+            <div class="form-group">
+                <label>Nome da instituição *</label>
+                {{form.name|add_class:"form-control"}}
+            </div>
+
+
+            <div class="row">
+                
+                <div class="col-md-6">
+                    <label>E-mail *</label>
+                    {{form.email|add_class:"form-control"}}
+                </div>
+
+                <div class="col-md-6">
+                    <label>Nome de usuário *</label>
+                    {{form.username|add_class:"form-control"}}
+                </div>
+            </div>
+            
+            <br>
+            
+
+            <div class="row">
+            
+                <div class="col-md-6">
+                    <label>Definir Senha *</label>
+                    {{form.password1|add_class:"form-control"}}
+                </div>
+            
+                <div class="col-md-6">
+                    <label>Repetir Senha*</label>
+                    {{form.password2|add_class:"form-control"}}
+                </div>
+            </div>
+            
+            <br>
+
+
+
+            <div class="row">
+            
+                <div class="col-md-6">
+                <label>Endereço *</label>
+                {{form.address|add_class:"form-control"}}
+                </div>
+            
+                <div class="col-md-6">
+                    <label>Telefone/Celular *</label>
+                    {{form.phone|add_class:"form-control"}}
+                </div>
+            </div>
+
+            <br>
+
+
+            <div class="form-group d-none" id="cod">
+                <label for="exampleInputEmail1">Código único da escola</label>
+                {{form.username|add_class:"form-control"}}
+            </div>
+
+            <button class="btn btn-success" type="button" id="code_generator">Gerar códigos da escola</button>
+            <p class="d-none cod_student" id="view_student_code"></p>
+            <p class="d-none cod_teacher" id="view_teacher_code"></p>
+            <small class="form-text text-muted">
+                Os códigos únicos serão usados para que professores e alunos encontrem sua escola. Todo professor e aluno 
+                que for utilizar o EducaOnline deve informar o seu respectivo código. 
+            </small>
+
+            {{form.cod_student|add_class:"d-none"}}
+            {{form.cod_teacher|add_class:"d-none"}}
+
+            <br>
+            <button type="submit" class="btn btn-primary col-md-12 d-none" id="btnRegister">Cadastrar</button>
+        </form>
+        
+    </div>
+
+
+
+    <button type="button" class="d-none" id="modalButton" data-toggle="modal" data-target="#modal" >Ativar Model</button>
+    <div class="modal" id=modal tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    
+                    <h5 class="modal-title">
+                        <i class="fas fa-check text-success"></i>
+                        Códigos Gerados
+                    </h5>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Os códigos de acesso <i class="fas fa-key text-warning"></i> para sua escola foram gerados com sucesso.</p>
+                
+                    <p class="alert alert-warning inline text-center">Código para os Alunos:
+                        <br> 
+                        <strong>
+                            <span class="cod_student">ALUNO-516514</span>
+                        </strong>
+                    </p>
+
+
+                    <p>
+                        <i class="fas fa-exclamation-triangle text-danger"></i>
+                        Envie o código <span class="cod_student"></span> <strong>somente para seus ALUNOS</strong>
+                    </p>
+
+                    <p class="alert alert-warning inline text-center">Código para os professores:
+                        <br>
+                        <strong>
+                            <span class="cod_teacher">PROFESSOR-516514</span>
+                        </strong>
+                    </p>
+
+                    <p>
+                        <i class="fas fa-exclamation-triangle text-danger"></i>
+                        Envie o código <span class="cod_teacher"></span> <strong>somente para seus PROFESSORES</strong>
+                        tenha muito cuidado ao compartilhar. A pessoa com este código terá contato com seus alunos, portanto tenha certeza com quem compartilhar.
+                    </p>
+                
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Entendi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+
+        let buttonCodeGenerate = document.querySelector("#code_generator");
+
+        buttonCodeGenerate.addEventListener('click', ()=>{
+            let nameSchool = document.querySelector('#id_name');
+            if(!nameSchool.value){
+                alert("Por Favor, informe o nome de sua escola.");
+            }else{
+
+                let cod_student = "ALUNO-"+randomDigits();
+                let cod_teacher = "PROFESSOR-"+randomDigits();
+
+                finishCodeGenerate(cod_student, cod_teacher);
+
+            }
+        })
+
+        function randomDigits(){
+            let baseCode = String(Date.now());
+            let baseFinished = '';
+            let sizeLimitRandom = baseCode.length;
+            for (let digit = 1; digit <= 5; digit++) {
+                let position = Math.floor(Math.random() * sizeLimitRandom);
+                baseFinished += baseCode[position];
+            }
+
+            return baseFinished;
+        }
+
+        function finishCodeGenerate(code_student, code_teacher){
+
+
+            document.querySelectorAll('.cod_student').forEach((element)=>{
+                element.textContent = code_student;
+                if(element.id == "view_student_code"){
+                    element.className="alert alert-warning text-center"
+                }
+            })
+
+            document.querySelectorAll('.cod_teacher').forEach((element)=>{
+                element.textContent = code_teacher;
+                if (element.id == "view_teacher_code") {
+                    element.className = "alert alert-warning text-center";
+                }
+            })
+
+            document.querySelector("#modalButton").click();
+            document.querySelector("#code_generator").className = "d-none";
+            document.querySelector("#btnRegister").className="btn btn-primary col-md-12";
+
+            document.querySelector("#id_cod_student").value = code_student;
+            document.querySelector("#id_cod_teacher").value = code_teacher;
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="dashboard">
+        <div class="group-cards2X2">
+    
+            <a href="">
+                <div class="card">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <br>
+                    <label>Sou Professor</label>
+                </div>
+            </a>
+
+            <a href="{% url 'accounts:school_register' %}">
+                <div class="card">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <br>
+                    <label>Sou Escola</label>
+                </div>
+            </a>
+
+        </div>
+    
+    </div>
+{% endblock %}
