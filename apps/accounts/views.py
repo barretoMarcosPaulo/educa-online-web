@@ -1,8 +1,7 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, CreateView
+from django.views.generic import TemplateView, CreateView, RedirectView
 
 from .forms import UserSchoolForm
-
 
 class RegisterSchool(CreateView):
     template_name = "school/register.html"

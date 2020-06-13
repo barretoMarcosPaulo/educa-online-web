@@ -2,7 +2,7 @@
 {% block subtitle %}| Painel da escola{% endblock %}
 {% block body %}
 
-
+    <br>
     <div class="dashboard card-size70">
         <div class="group-cards">
 
@@ -10,7 +10,7 @@
                 <div class="card">
                     <i class="fas fa-chalkboard-teacher"></i>
                     <br>
-                    <label>Professores</label>
+                    <label>Professores {{request.user}}</label>
                 </div>
             </a>
             <div class="card">

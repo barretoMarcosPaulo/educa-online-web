@@ -96,6 +96,12 @@ AUTHENTICATION_BACKENDS = (
     'apps.accounts.backends.ModelBackend',
 )
 
+AUTH_USER_MODEL = 'accounts.User'
+
+LOGIN_URL = '/accounts/login/'
+LOGOUT_URL = '/accounts/logout/'
+LOGIN_REDIRECT_URL = 'core:dashboard'
+LOGOUT_REDIRECT_URL = '/accounts/login/'
 
 
 # Internationalization

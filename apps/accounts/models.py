@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, UserManager
 from django.urls import reverse
+from django.apps import apps
 
 class User(AbstractBaseUser):
     name = models.CharField('Nome', max_length=255, blank=False, null=False)
@@ -17,7 +18,7 @@ class User(AbstractBaseUser):
 
     EMAIL_FIELD = 'email'
     USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['name', 'email','username']
+    REQUIRED_FIELDS = ['name', 'email']
 
     class Meta:
         verbose_name = 'Usuário'
@@ -28,6 +29,17 @@ class User(AbstractBaseUser):
 
     def get_absolute_url(self):
         return reverse('accounts:login')
+    
+    def get_type_user(self):
+        type_user = "school"
+
+        try:
+            SchoolModel = apps.get_model('school', 'SchoolInstitution')
+            SchoolModel.objects.get(pk=self)
+        except:
+            type_user = "teacher"
         
+        return type_user
+
     def __str__(self):
         return self.name

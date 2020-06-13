@@ -7,6 +7,7 @@ app_name = 'accounts'
 urlpatterns = [
 
     path('cadastro-escola/', RegisterSchool.as_view(), name='school_register'),
-    path('entrar/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+    path('entrar/', auth_views.LoginView.as_view(template_name='login.html',redirect_authenticated_user=True), name='login'),
     path('sair/', auth_views.LogoutView.as_view(), name='logout'),
+
 ]
