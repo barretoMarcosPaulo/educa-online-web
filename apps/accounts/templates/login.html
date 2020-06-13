@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block subtitle %}| Área da Escola{% endblock %}
+{% block body %}
+    <br>
+    <div class="box-cards col-md-4" style="margin-top: 5%;">
+        
+        <h3 class="col-md-7" style="display:block; margin: 0 auto;">Login da escola</h3>
+        {{form.errors}}
+        <form method="POST" style="margin-top: 3%;"> {% csrf_token %}
+    
+            <div class="form-group">
+                <label>Usuário *</label>
+                <input class="form-control" name="username" type="text" placeholder="Nome de usuario da escola">
+            </div>
+    
+            <div class="form-group">
+                <label>Sua senha *</label>
+                <input class="form-control" name="password" type="password" placeholder="Informe sua senha">
+            </div>
+
+            <button type="submit" class="btn btn-primary col-md-12" id="btnRegister">Entrar</button>
+        </form>
+    
+    </div>
+    
+{% endblock %}

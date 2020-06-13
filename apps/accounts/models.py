@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, UserManager
-
+from django.urls import reverse
 
 class User(AbstractBaseUser):
     name = models.CharField('Nome', max_length=255, blank=False, null=False)
@@ -17,7 +17,7 @@ class User(AbstractBaseUser):
 
     EMAIL_FIELD = 'email'
     USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['name', 'email']
+    REQUIRED_FIELDS = ['name', 'email','username']
 
     class Meta:
         verbose_name = 'Usuário'
@@ -26,5 +26,8 @@ class User(AbstractBaseUser):
     def get_short_name(self):
         return self.name.split(' ')[0]
 
+    def get_absolute_url(self):
+        return reverse('accounts:login')
+        
     def __str__(self):
         return self.name

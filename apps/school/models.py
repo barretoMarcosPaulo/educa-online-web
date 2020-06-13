@@ -1,7 +1,7 @@
 from django.db import models
 from apps.core.models import TimeStamp
 from apps.accounts.models import User
-
+from django.urls import reverse
 
 class SchoolInstitution(User, TimeStamp):
     address = models.CharField('Endereço', max_length=255, blank=False, null=False)
@@ -11,7 +11,10 @@ class SchoolInstitution(User, TimeStamp):
     class Meta:
         verbose_name = "Escola"
         verbose_name_plural = "Escolas"
-    
+
+    def get_absolute_url(self):
+        return reverse('accounts:login')
+
     def __str__(self):
         return self.name
 

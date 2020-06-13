@@ -7,14 +7,13 @@
     <br>
     <div class="box-cards col-md-6">
     
-        <h3>Cadastrar da Escola</h3>
-        {{ form.error}}
-        {{ form.errors}}
+        <h3>Cadastrar minha escola</h3>
+
         <form method="POST" style="margin-top: 3%;"> {% csrf_token %}
 
             <div class="form-group">
                 <label>Nome da instituição *</label>
-                {{form.name|add_class:"form-control"}}
+                <input class="form-control" type="text" placeholder="Qual o nome da sua escola?" name="name" id="id_name" required>
             </div>
 
 
@@ -22,28 +21,31 @@
                 
                 <div class="col-md-6">
                     <label>E-mail *</label>
-                    {{form.email|add_class:"form-control"}}
+                    <input class="form-control" type="email" placeholder="Endereço de e-mail" name="email" required>
                 </div>
 
                 <div class="col-md-6">
-                    <label>Nome de usuário *</label>
-                    {{form.username|add_class:"form-control"}}
+                    <label>Nome de usuário*</label>
+                    <input class="form-control" type="text" placeholder="Ex.: EscolinhadoSaber" name="username" required>
+                    <small class="form-text text-muted">
+                        Não utilize espaços no nome de usuário.
+                    </small>
+
                 </div>
             </div>
             
-            <br>
             
 
             <div class="row">
             
                 <div class="col-md-6">
                     <label>Definir Senha *</label>
-                    {{form.password1|add_class:"form-control"}}
+                    <input class="form-control" type="password" placeholder="Senha de acesso" name="password1" required>
                 </div>
             
                 <div class="col-md-6">
                     <label>Repetir Senha*</label>
-                    {{form.password2|add_class:"form-control"}}
+                    <input class="form-control" type="password" placeholder="Repita sua senha " name="password2" required>
                 </div>
             </div>
             
@@ -55,22 +57,16 @@
             
                 <div class="col-md-6">
                 <label>Endereço *</label>
-                {{form.address|add_class:"form-control"}}
+                <input class="form-control" type="text" placeholder="Cidade,Estado..." name="address">
                 </div>
             
                 <div class="col-md-6">
                     <label>Telefone/Celular *</label>
-                    {{form.phone|add_class:"form-control"}}
+                    <input class="form-control" type="number" placeholder="Pode ser whatsapp" name="phone">
                 </div>
             </div>
 
             <br>
-
-
-            <div class="form-group d-none" id="cod">
-                <label for="exampleInputEmail1">Código único da escola</label>
-                {{form.username|add_class:"form-control"}}
-            </div>
 
             <button class="btn btn-success" type="button" id="code_generator">Gerar códigos da escola</button>
             <p class="d-none cod_student" id="view_student_code"></p>
