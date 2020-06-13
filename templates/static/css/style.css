@@ -8,11 +8,17 @@
 ul li{
     list-style: none;
 }
-a{
+body a{
     text-decoration: none;
     outline: none;
     color: black;
 }
+body a:hover{
+    text-decoration: none;
+    outline: none;
+    color: black;
+}
+
 
 body{
     color: #797979;
@@ -65,7 +71,7 @@ input,button,label{
 .dashboard{
     border-radius: 5px;
     max-width: 100%;
-    margin: 5% auto;
+    margin: 3% auto;
     padding: 25px;
 }
 
@@ -93,10 +99,9 @@ h3{
     
 }
 .dashboard .group-cards{
-    display: grid;
-    grid-template-columns: 30% 30% 30%;
+    /* display: grid; */
+    /* grid-template-columns: 30% 30% 30%; */
     justify-content: center;
-    padding-top: 2%;
     
 }
 
@@ -104,13 +109,13 @@ h3{
     cursor: pointer;
     border: solid 1px gray;
     text-align: center;
-    margin-right: 4%;
-    margin-bottom: 5%;
+    margin-right: 1%;
+    margin-bottom: 2%;
     font-size: 21px;
     color: gray;
     border-radius: 5px;
     padding: 40px;
-    transition: background-color 0.3s, padding 1s, border 1s;
+    transition: background-color 0.4s, padding 1s, border 1s;
     background-color: white;
 }
 

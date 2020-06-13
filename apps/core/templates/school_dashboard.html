@@ -3,46 +3,57 @@
 {% block body %}
 
     <br>
-    <div class="dashboard card-size70">
-        <div class="group-cards">
+    <div class="dashboard col-md-10">
+        <div class="group-cards col-md-12 row">
 
-            <a href="teachers_list.html">
+            <a href="#" class="col-md-4 col-sm-12">
                 <div class="card">
                     <i class="fas fa-chalkboard-teacher"></i>
                     <br>
-                    <label>Professores {{request.user}}</label>
+                    <label>Professores</label>
+                </div>
+            </a>    
+
+
+            <a href="#" class="col-md-4 col-sm-12">
+                <div class="card">
+                    <i class="fas fa-child"></i>
+                    <br>
+                    <label>Alunos</label>
                 </div>
             </a>
-            <div class="card">
-                <i class="fas fa-child"></i>
-                <br>
-                <label>Alunos</label>
-            </div>
 
-            <div class="card">
-                <i class="fas fa-th-list"></i>
-                <br>
-                <label>Matérias</label>
-            </div>
+            <a href="#" class="col-md-4 col-sm-12">
+                <div class="card">
+                    <i class="fas fa-th-list"></i>
+                    <br>
+                    <label>Matérias</label>
+                </div>
+            </a>
 
-            <div class="card">
-                <i class="fas fa-th-large"></i>
-                <br>
-                <label>Turmas</label>
-            </div>
+            <a href="#" class="col-md-4 col-sm-12">
+                <div class="card">
+                    <i class="fas fa-th-large"></i>
+                    <br>
+                    <label>Turmas</label>
+                </div>
+            </a>
 
+            <a href="#" class="col-md-4 col-sm-12">
+                <div class="card">
+                    <i class="fas fa-book"></i>
+                    <br>
+                    <label>Atividades</label>
+                </div>
+            </a>
 
-            <div class="card">
-                <i class="fas fa-book"></i>
-                <br>
-                <label>Atividades</label>
-            </div>
-
-            <div class="card">
-                <i class="fas fa-book-reader"></i>
-                <br>
-                <label>Provas</label>
-            </div>
+            <a href="#" class="col-md-4 col-sm-12">
+                <div class="card">
+                    <i class="fas fa-book-reader"></i>
+                    <br>
+                    <label>Provas</label>
+                </div>
+            </a>
 
         </div>
 
