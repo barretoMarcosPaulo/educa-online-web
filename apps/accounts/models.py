@@ -6,7 +6,7 @@ from django.apps import apps
 class User(AbstractBaseUser):
     name = models.CharField('Nome', max_length=255, blank=False, null=False)
     username = models.CharField('Nome de usuário', max_length=100, unique=True, null=True, blank=True)
-    email = models.CharField('Email', max_length=100, unique=True, null=False, blank=False)
+    email = models.CharField('Email', max_length=100, unique=True, null=True, blank=True)
     phone = models.CharField('Telefone', max_length=20, unique=True, null=False, blank=False)
 
     is_staff = models.BooleanField('staff status', default=False)
