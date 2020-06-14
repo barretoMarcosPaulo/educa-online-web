@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm, PasswordResetForm
 from django import forms
 from .models import *
-from apps.school.models import SchoolInstitution
+from apps.school.models import SchoolInstitution, Teacher
 from django.contrib.auth import get_user_model
 
 
@@ -44,3 +44,11 @@ class UserSchoolForm(UserCreationForm):
 			raise forms.ValidationError(
 				'Este endereço de email já está em uso. Por favor, use um email diferente.')
 		return email
+
+
+
+class UserTeacherlForm(UserCreationForm):
+
+	class Meta:
+		model = Teacher
+		fields = ['name', 'username', 'phone']
