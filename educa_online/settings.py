@@ -100,7 +100,7 @@ AUTH_USER_MODEL = 'accounts.User'
 
 LOGIN_URL = '/accounts/login/'
 LOGOUT_URL = '/accounts/logout/'
-LOGIN_REDIRECT_URL = 'core:dashboard'
+LOGIN_REDIRECT_URL = 'accouts:check_user_type'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
 
 
