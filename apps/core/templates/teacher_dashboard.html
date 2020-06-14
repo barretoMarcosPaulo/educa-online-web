@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+{% block subtitle %}| Painel do Professor(a){% endblock %}
+{% block body %}
+
+    <br>
+    <div class="dashboard col-md-10">
+        <div class="group-cards col-md-12 row">
+
+            <a href="#" class="col-md-8 col-sm-12">
+                <div class="card">
+                    <i class="fas fa-book"></i>
+                    <br>
+                    <label>Atividades</label>
+                </div>
+            </a>
+
+            <a href="#" class="col-md-4 col-sm-12">
+                <div class="card">
+                    <i class="fas fa-child"></i>
+                    <br>
+                    <label>Alunos</label>
+                </div>
+            </a>
+
+            <a href="#" class="col-md-4 col-sm-12">
+                <div class="card">
+                    <i class="fas fa-th-large"></i>
+                    <br>
+                    <label>Turmas</label>
+                </div>
+            </a>
+
+            <a href="#" class="col-md-4 col-sm-12">
+                <div class="card">
+                    <i class="fas fa-th-list"></i>
+                    <br>
+                    <label>Matérias</label>
+                </div>
+            </a>
+
+            <a href="#" class="col-md-4 col-sm-12">
+                <div class="card">
+                    <i class="fas fa-book-reader"></i>
+                    <br>
+                    <label>Provas</label>
+                </div>
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <button type="button" class="d-none" id="modalButton" data-toggle="modal" data-target="#modal">Ativar Modal</button>
+    <div class="modal" id=modal tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+    
+                    <h5 class="modal-title">
+                        Bem vindo(a) {{request.user.get_short_name}}
+                    </h5>
+                </div>
+                <div class="modal-body">
+
+                    <div id="message1">
+
+                        <p>
+                            Professor(a) {{request.user.get_short_name}} você ainda não possui vínculo com sua escola,
+                            mas calma, basta apenas informar o <strong>código</strong> que a escola te enviou.
+                        </p>
+                        
+                        <p class="alert alert-warning">
+                            <label>Código do Professor:</label>
+                            {% csrf_token %}
+                            <input type="text" class="form-control" placeholder="Digite seu código aqui" id="inputCode" style="text-align: center;">
+                        </p>
+
+                        <p>
+                            Caso ainda não tenha recebido entre em contato com sua escola.
+                        </p>
+                    </div>
+
+                    <div id="message2" class="d-none">
+                        <p class="alert alert-success text-center">
+                            Encontramos sua escola! Bem vindo a <strong id="name_school"></strong>
+                        </p>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary col-md-12" id="btnSendCode">Concluir</button>
+                    <button type="button" class="btn btn-primary d-none" id="btnClose" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        window.onload = ()=>{
+            let not_have_school = '{{user_teacher.not_have_school}}';
+            if (not_have_school == 'True') {
+                let buttonModal = document.getElementById('modalButton');
+                buttonModal.click();
+            }
+        }
+    </script>
+
+    <script>
+    
+        let codeTeacher;
+        let tokenId= document.getElementsByName('csrfmiddlewaretoken')[0].value;
+
+        document.querySelector('#btnSendCode').addEventListener('click', ()=>{
+            codeTeacher = document.querySelector('#inputCode').value;
+
+            let urlRequest = `../../buscar/escola/${codeTeacher}/`;
+
+            fetch(urlRequest, {
+                method: 'get'
+            })
+                .then(async function (response) {
+                    let res = await response.json();
+                    if(res.code == 1){
+                        changeModal(res.name)
+                    }else{
+                        alert('Não há nenhuma escola cadastrada com este código');
+                    }
+
+                })
+                .catch(function (err) { console.error(err); });
+        
+        })
+
+        function changeModal(name_school){
+            document.querySelector('#btnSendCode').className = 'd-none';
+            document.querySelector('#btnClose').className = 'btn btn-primary';
+
+            document.querySelector('#message1').className = 'd-none';
+            document.querySelector('#message2').className = '';
+            document.querySelector('#name_school').textContent = name_school;
+        }
+    
+    </script>
+{% endblock %}

@@ -57,6 +57,12 @@ class Teacher(User,TimeStamp):
     def get_absolute_url(self):
         return reverse('accounts:login')
 
+    def not_have_school(self):
+        not_have = True
+        if(self.school):
+            not_have = False
+        return not_have
+
     def __str__(self):
         return self.name
 
