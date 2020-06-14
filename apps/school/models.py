@@ -46,7 +46,7 @@ class ClassRoomm(TimeStamp):
 
 
 class Teacher(User,TimeStamp):
-    school = models.ForeignKey(SchoolInstitution,on_delete=models.PROTECT)
+    school = models.ForeignKey(SchoolInstitution,on_delete=models.PROTECT, null=True, blank=True)
     subjects = models.ManyToManyField(SchoolSubjects)
     classroom = models.ManyToManyField(ClassRoomm)
 

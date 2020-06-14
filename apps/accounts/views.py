@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, CreateView, RedirectView
 
-from .forms import UserSchoolForm, UserTeacherlForm
+from .forms import UserSchoolForm, UserTeacherForm
 
 
 class RegisterSchool(CreateView):
@@ -11,4 +11,4 @@ class RegisterSchool(CreateView):
 
 class RegisterTeacher(CreateView):
     template_name = "teacher/register.html"
-    form_class = UserSchoolForm
+    form_class = UserTeacherForm

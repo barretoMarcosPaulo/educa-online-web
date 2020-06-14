@@ -46,8 +46,7 @@ class UserSchoolForm(UserCreationForm):
 		return email
 
 
-
-class UserTeacherlForm(UserCreationForm):
+class UserTeacherForm(UserCreationForm):
 
 	class Meta:
 		model = Teacher
