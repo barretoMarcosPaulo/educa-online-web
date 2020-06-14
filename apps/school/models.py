@@ -54,8 +54,12 @@ class Teacher(User,TimeStamp):
         verbose_name = "Professor(a)"
         verbose_name_plural = "Professores(as)"
 
+    def get_absolute_url(self):
+        return reverse('accounts:login')
+
     def __str__(self):
         return self.name
+
 
 
 
