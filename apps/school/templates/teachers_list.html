@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <br>
+    <div class="dashboard">
+        <div class="box-cards col-md-10">
+    
+            <h3>Professores(as) da escola</h3>
+
+            <br>
+            <br>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Telefone</th>
+                        <th scope="col">Turmas</th>
+                        <th scope="col">Matérias</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for teacher in teachers %}
+                    <tr>
+                        <th>{{teacher.name}}</th>
+                        <td>{{teacher.phone}}</td>
+                        <td>1ºano</td>
+                        <td>Português</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    
+    </div>
+{% endblock %}
