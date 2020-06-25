@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <br>
+    <div class="dashboard">
+ 
+ 
+        <div class="box-cards col-md-10">
+        
+            <h3>Adicionar uma nova matéria</h3>
+        
+            <br>
+            <br>
+        
+            <form class="form-inline">
+                <div class="form-group mx-sm-3 mb-2 col-md-10">
+                    <input type="text" class="form-control col-md-12" autofocus id="subject_id" placeholder="Ex.: Portugês, Matemática, História, Biologia etc ...">
+                </div>
+                <button type="submit" class="btn btn-success mb-2">Adicionar</button>
+            </form>
+            <small class="form-text text-muted" style="margin-left: 30px;">
+                Para adicionar várias de uma vez só digite os nomes seprando por vírgula.
+            </small>
+
+
+        </div>
+        
+        <br>
+ 
+        <div class="box-cards col-md-10">
+    
+            <h3>Matérias que já foram adicionadas</h3>
+
+            <br>
+            <br>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col" width="80%">Nome da Matéria</th>
+                        <th scope="col">Excluir</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for subject in subjects %}
+                    <tr>
+                        <td>{{subject.name}}</td>
+                        <td>
+                            <a class="btn btn-danger">
+                                Excluir  
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+{% endblock %}
