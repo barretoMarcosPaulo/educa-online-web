@@ -17,11 +17,26 @@ class SchoolSubjects(TimeStamp):
 
 
 
+class ClassRoomm(TimeStamp):
+    name_year = models.CharField(
+        "Nome/Ano", max_length=100, blank=False, null=False)
+
+    class Meta:
+        verbose_name = "Turma"
+        verbose_name_plural = "Turmas"
+
+    def __str__(self):
+        return self.name_year
+
+
+
+
 class SchoolInstitution(User, TimeStamp):
     address = models.CharField('Endereço', max_length=255, blank=False, null=False)
     cod_student = models.CharField("Código do Aluno", max_length=255, blank=False, null=False)
     cod_teacher = models.CharField("Código do Professor", max_length=255, blank=False, null=False)
     subjects = models.ManyToManyField(SchoolSubjects)
+    class_rooms = models.ManyToManyField(ClassRoomm)
 
     class Meta:
         verbose_name = "Escola"
@@ -32,19 +47,6 @@ class SchoolInstitution(User, TimeStamp):
 
     def __str__(self):
         return self.name
-
-
-
-class ClassRoomm(TimeStamp):
-    name_year = models.CharField("Nome/Ano", max_length=100, blank=False, null=False)
-    subjects = models.ManyToManyField(SchoolSubjects)
-   
-    class Meta:
-        verbose_name = "Turma"
-        verbose_name_plural = "Turmas"
-
-    def __str__(self):
-        return self.name_year
 
 
 
