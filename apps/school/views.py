@@ -15,3 +15,6 @@ class ListTeachersSchool(TemplateView):
 
         return context
 
+
+class ListAddSubjects(TemplateView):
+    template_name = "subjects.html"
