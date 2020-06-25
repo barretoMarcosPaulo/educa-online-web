@@ -3,10 +3,25 @@ from apps.core.models import TimeStamp
 from apps.accounts.models import User
 from django.urls import reverse
 
+
+class SchoolSubjects(TimeStamp):
+    name = models.CharField(
+        'Nome da matéria', max_length=100, blank=False, null=False)
+
+    class Meta:
+        verbose_name = "Matéria"
+        verbose_name_plural = "Matérias"
+
+    def __str__(self):
+        return self.name
+
+
+
 class SchoolInstitution(User, TimeStamp):
     address = models.CharField('Endereço', max_length=255, blank=False, null=False)
     cod_student = models.CharField("Código do Aluno", max_length=255, blank=False, null=False)
     cod_teacher = models.CharField("Código do Professor", max_length=255, blank=False, null=False)
+    subjects = models.ManyToManyField(SchoolSubjects)
 
     class Meta:
         verbose_name = "Escola"
@@ -15,18 +30,6 @@ class SchoolInstitution(User, TimeStamp):
     def get_absolute_url(self):
         return reverse('accounts:login')
 
-    def __str__(self):
-        return self.name
-
-
-
-class SchoolSubjects(TimeStamp):
-    name = models.CharField('Nome da matéria', max_length=100, blank=False, null=False)
-
-    class Meta:
-        verbose_name = "Matéria"
-        verbose_name_plural="Matérias"
-    
     def __str__(self):
         return self.name
 
