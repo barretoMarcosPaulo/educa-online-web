@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
-from .models import SchoolInstitution,Teacher, SchoolSubjects
+from .models import SchoolInstitution, Teacher, SchoolSubjects, ClassRoomm
 from django.urls import reverse
 from django.shortcuts import redirect
 
@@ -49,3 +49,31 @@ class ListAddSubjects(TemplateView):
         user_school.subjects.add(*subjects_created)
 
         return redirect('school:subjects')
+
+
+class ListAddClassRoomm(TemplateView):
+    template_name = "class_room.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(ListAddClassRoomm, self).get_context_data(**kwargs)
+        user_school = SchoolInstitution.objects.get(pk=self.request.user.pk)
+        context['class_rooms'] = user_school.class_rooms.all().order_by('-created_at')
+
+        return context
+
+    def post(self, request, *args, **kwargs):
+
+        class_room = request.POST.get('class_rooms')
+        class_room_array = class_room.split(',')
+        class_room_created = list()
+
+        for class_room in class_room_array:
+            if class_room != ' ':
+                new_class_room = ClassRoomm.objects.create(name_year=class_room)
+                class_room_created.append(new_class_room)
+
+        print(class_room_created)
+        user_school = SchoolInstitution.objects.get(pk=self.request.user.pk)
+        user_school.class_rooms.add(*class_room_created)
+
+        return redirect('school:class_room')

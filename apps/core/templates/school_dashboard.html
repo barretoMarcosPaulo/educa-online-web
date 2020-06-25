@@ -6,7 +6,7 @@
     <div class="dashboard col-md-10">
         <div class="group-cards col-md-12 row">
 
-            <a href="#" class="col-md-4 col-sm-12">
+            <a href="{% url 'school:list_teachers' %}" class="col-md-4 col-sm-12">
                 <div class="card">
                     <i class="fas fa-chalkboard-teacher"></i>
                     <br>
@@ -23,7 +23,7 @@
                 </div>
             </a>
 
-            <a href="#" class="col-md-4 col-sm-12">
+            <a href="{% url 'school:subjects' %}" class="col-md-4 col-sm-12">
                 <div class="card">
                     <i class="fas fa-th-list"></i>
                     <br>
@@ -31,7 +31,7 @@
                 </div>
             </a>
 
-            <a href="#" class="col-md-4 col-sm-12">
+            <a  href="{% url 'school:class_room' %}" class="col-md-4 col-sm-12">
                 <div class="card">
                     <i class="fas fa-th-large"></i>
                     <br>

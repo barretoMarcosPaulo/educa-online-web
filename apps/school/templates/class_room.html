@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<br>
+<div class="dashboard">
+
+
+    <div class="box-cards col-md-10">
+
+        <h3>Adicionar uma nova turma virtual</h3>
+
+        <br>
+        <br>
+
+        <form class="form-inline" method="POST">{% csrf_token %}
+
+            <div class="form-group mx-sm-3 mb-2 col-md-10">
+                <input type="text" name="class_rooms" class="form-control col-md-12" autofocus id="subject_id"
+                    placeholder="Ex.: 2º Ano, 5º Ano, 7º Ano, 9º Ano etc ...">
+            </div>
+            <button type="submit" class="btn btn-success mb-2">Adicionar</button>
+
+        </form>
+
+        <small class="form-text text-muted" style="margin-left: 30px;">
+            Para adicionar várias de uma vez só digite os nomes seprando por vírgula.
+        </small>
+
+
+    </div>
+
+    <br>
+
+    <div class="box-cards col-md-10">
+
+        <h3>Turmas que já foram adicionadas</h3>
+
+        <br>
+        <br>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col" width="80%">Nome da Turma</th>
+                    <th scope="col" class="text-center">Excluir</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for class in class_rooms %}
+                <tr>
+                    <td>{{class.name_year}}</td>
+                    <td class="text-center">
+                        <a class="btn btn-danger" title="Remover esta matéria da minha escola">
+                            <i class="fas fa-trash-alt text-white"></i>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</div>
+{% endblock %}
