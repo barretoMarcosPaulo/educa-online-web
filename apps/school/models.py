@@ -5,8 +5,7 @@ from django.urls import reverse
 
 
 class SchoolSubjects(TimeStamp):
-    name = models.CharField(
-        'Nome da matéria', max_length=100, blank=False, null=False)
+    name = models.CharField('Nome da matéria', max_length=100, blank=False, null=False)
 
     class Meta:
         verbose_name = "Matéria"
