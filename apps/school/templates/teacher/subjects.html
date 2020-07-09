@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block body %}
+
+<br>
+<div class="dashboard">
+
+
+    <div class="box-cards col-md-10">
+
+        <h3>Suas Matérias</h3>
+
+        <br>
+        <br>
+
+        {% if have_subjects%}
+            {% for subject in teacher.subjects.all %}
+                <label class="btn btn-info btn-sm">
+                    {{subject}}
+                </label>
+            {% endfor %}
+        {% else %}
+            <div class="alert alert-danger text-center col-md-12">
+                <strong><i class="fas fa-exclamation-triangle"></i></strong>
+                Professor(a) {{request.user.get_short_name}},
+                você ainda não escolheu suas matérias, por favor selecione
+                abaixo as matérias que você ministra.
+            </div>
+            <small class="form-text text-muted" style="margin-left: 30px;">
+               <strong>Clique nas matérias que você ministra.</strong>
+            </small>
+        {% endif %}
+
+
+
+    </div>
+
+    <br>
+
+    <div class="box-cards col-md-10">
+
+        <h3>Selecione as matérias que você ministra</h3>
+
+        <br>
+        <br>
+
+        <div class="text-center col-md-12">
+            {% for subject in subjects_suggestions %}
+                <div class="d-inline-block" style="margin-right: 2%;">
+                    <input type="checkbox"  id="{{subject.id}}" value="{{subject.id}}" class="checkbox">
+                    {{subject}}
+                </div>
+            {% endfor %}
+            <button class="btn btn-success btn-sm" id="btn-send">Ok, Enviar</button>
+        </div>
+
+        <form method="POST" class="d-none" id="formSubjects">
+            {% csrf_token %}
+            <input type="text" id="subjects" name="subjects">
+        </form>
+    
+    </div>
+</div>
+
+
+<script>
+    // Send Subjects
+    document.querySelector('#btn-send').addEventListener('click', function(){
+        let valid = checkSelectSubjects();
+        if(!valid){
+            alert('Selecione pelo menos uma matéria');
+        }else{
+            document.querySelector('#subjects').value = getValuesCheckbox();
+            document.querySelector('#formSubjects').submit();
+
+        }
+    })
+
+    function checkSelectSubjects(){
+        let oneChecked = false;
+        document.querySelectorAll('.checkbox').forEach((checkbox)=>{
+            if(checkbox.checked) oneChecked = true;
+        })
+        return oneChecked;
+    }
+
+    function getValuesCheckbox(){
+        let listStrSubjects = "";
+
+        document.querySelectorAll('.checkbox').forEach((checkbox) => {
+            if (checkbox.checked){
+                listStrSubjects+=`,${checkbox.value}`
+            }
+        })
+
+        return listStrSubjects.substring(1);
+;
+    }
+
+</script>
+{% endblock %}
