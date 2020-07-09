@@ -77,3 +77,46 @@ class ListAddClassRoomm(TemplateView):
         user_school.class_rooms.add(*class_room_created)
 
         return redirect('school:class_room')
+
+
+class TeacherSubjects(TemplateView):
+    template_name = "teacher/subjects.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(TeacherSubjects, self).get_context_data(**kwargs)
+        
+        teacher = Teacher.objects.get(pk=self.request.user.pk)
+        have_subjects = True
+        subjects_suggestions = list()
+
+        if not teacher.subjects.all():
+            have_subjects = False
+            subjects_suggestions = teacher.school.subjects.all()
+        else:
+            teacher_subjects = teacher.subjects.all()
+            for subject in teacher.school.subjects.all():
+                if subject not in teacher_subjects:
+                    subjects_suggestions.append(subject)
+        
+        context['teacher'] = teacher
+        context['have_subjects'] = have_subjects
+        context['subjects_suggestions'] = subjects_suggestions
+        
+        return context
+    
+    def post(self, request, *args, **kwargs):
+        subjects_ids = request.POST.get('subjects', None)
+        
+        teacher = Teacher.objects.get(pk=self.request.user.pk)
+        teacher.subjects.add(*subjects_ids.split(','))
+
+        return redirect('school:subjects_teacher')
+
+
+class TeacherClassRoom(TemplateView):
+    template_name = "teacher/class_rooms.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(TeacherClassRoom, self).get_context_data(**kwargs)
+        teacher = Teacher.objects.get(pk=self.request.user.pk)
+        return context
