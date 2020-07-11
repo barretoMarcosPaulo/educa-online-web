@@ -17,9 +17,9 @@ class SchoolSubjects(TimeStamp):
 
 
 class ClassRoomm(TimeStamp):
-    name_year = models.CharField(
-        "Nome/Ano", max_length=100, blank=False, null=False)
-
+    name_year = models.CharField("Nome/Ano", max_length=100, blank=False, null=False)
+    subjects = models.ManyToManyField(SchoolSubjects)
+    
     class Meta:
         verbose_name = "Turma"
         verbose_name_plural = "Turmas"
