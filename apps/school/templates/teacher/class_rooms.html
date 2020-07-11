@@ -43,19 +43,33 @@
 
         <br>
         <br>
-
-        <div class="text-center col-md-12">
-            {% for class in class_suggestions %}
-            <div class="d-inline-block" style="margin-right: 2%;">
-                <input type="checkbox" id="{{class.id}}" value="{{class.id}}" class="checkbox">
-                {{class}}
-            </div>
-            {% endfor %}
-            <button class="btn btn-success btn-sm" id="btn-send">Ok, Enviar</button>
+        
+        <!-- Select Class Room -->
+        <div class="form-group">
+            <label for="sel1">Escolha sua turma:</label>
+            <select class="form-control" id="select-box" onchange="changeTextInLabel(this)">
+                {% for class in class_suggestions %}
+                    <option id="{{class.id}}" value="{{class.id}}">{{class }}</option>
+                {% endfor %}
+            </select>
         </div>
 
-        <form method="POST" class="d-none" id="formSubjects">
+        <!-- Select Subjects -->
+        <label id="txt-class">Quais são suas matérias nesta turma? </label>
+        <div class="text-left col-md-12">
+            {% for subject in subjects %}
+            <div class="d-inline-block" style="margin-right: 2%;">
+                <input type="checkbox" id="{{subject.id}}" value="{{subject.id}}" class="checkbox">
+                {{subject}}
+            </div>
+            {% endfor %}
+        </div>
+        <button class="btn btn-success btn-sm" id="btn-send" style="margin-top: 2%;">Ok, Enviar</button>
+
+
+        <form method="POST" class="d-none" id="formClassRooms">
             {% csrf_token %}
+            <input type="text" id="class" name="class">
             <input type="text" id="subjects" name="subjects">
         </form>
 
@@ -66,23 +80,11 @@
 <script>
     // Send Subjects
     document.querySelector('#btn-send').addEventListener('click', function () {
-        let valid = checkSelectSubjects();
-        if (!valid) {
-            alert('Selecione pelo menos uma matéria');
-        } else {
-            document.querySelector('#subjects').value = getValuesCheckbox();
-            document.querySelector('#formSubjects').submit();
-
-        }
+        document.querySelector('#subjects').value = getValuesCheckbox();
+        document.querySelector('#formSubjects').submit();
     })
 
-    function checkSelectSubjects() {
-        let oneChecked = false;
-        document.querySelectorAll('.checkbox').forEach((checkbox) => {
-            if (checkbox.checked) oneChecked = true;
-        })
-        return oneChecked;
-    }
+
 
     function getValuesCheckbox() {
         let listStrSubjects = "";
@@ -94,8 +96,14 @@
         })
 
         return listStrSubjects.substring(1);
-        ;
+        
     }
 
+    // Change Text on label select subjects
+    function changeTextInLabel(select){
+        const textOption = select.options[select.selectedIndex].text;
+        console.log(select.value)
+        document.querySelector('#txt-class').textContent  = `Quais são sua matérias na turma ${textOption}`
+    }
 </script>
 {% endblock %}

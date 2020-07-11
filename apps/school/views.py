@@ -126,16 +126,16 @@ class TeacherClassRoom(TemplateView):
 
         if not teacher.classroom.all():
             have_class = False
-            class_suggestions = teacher.school.subjects.all()
+            class_suggestions = teacher.school.class_rooms.all()
         else:
             teacher_class = teacher.classroom.all()
             for class_room in teacher.school.class_rooms.all():
                 if class_room not in teacher_class:
                     class_suggestions.append(class_room)
 
-        print(have_class)
         context['teacher'] = teacher
         context['have_class_rooms'] = have_class
         context['class_suggestions'] = class_suggestions
+        context['subjects'] = teacher.subjects.all()
 
         return context
