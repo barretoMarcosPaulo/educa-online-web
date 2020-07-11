@@ -119,4 +119,23 @@ class TeacherClassRoom(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(TeacherClassRoom, self).get_context_data(**kwargs)
         teacher = Teacher.objects.get(pk=self.request.user.pk)
+
+
+        have_class = True
+        class_suggestions = list()
+
+        if not teacher.classroom.all():
+            have_class = False
+            class_suggestions = teacher.school.subjects.all()
+        else:
+            teacher_class = teacher.classroom.all()
+            for class_room in teacher.school.class_rooms.all():
+                if class_room not in teacher_class:
+                    class_suggestions.append(class_room)
+
+        print(have_class)
+        context['teacher'] = teacher
+        context['have_class_rooms'] = have_class
+        context['class_suggestions'] = class_suggestions
+
         return context
