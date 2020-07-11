@@ -139,3 +139,16 @@ class TeacherClassRoom(TemplateView):
         context['subjects'] = teacher.subjects.all()
 
         return context
+
+
+    def post(self, request, *args, **kwargs):
+        subjects_ids = request.POST.get('subjects', None)
+        class_room = request.POST.get('class', None)
+        
+        teacher = Teacher.objects.get(pk=self.request.user.pk)
+        teacher.classroom.add(class_room)
+        
+        currentClassRoom = ClassRoomm.objects.get(pk=class_room)
+        currentClassRoom.subjects.add(*subjects_ids.split(','))
+
+        return redirect('school:class_room_teacher')

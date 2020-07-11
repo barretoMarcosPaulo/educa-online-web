@@ -78,10 +78,14 @@
 
 
 <script>
-    // Send Subjects
+    
+    // Send Request
     document.querySelector('#btn-send').addEventListener('click', function () {
+        const valueSelectClass = document.querySelector('#select-box').value;
+
         document.querySelector('#subjects').value = getValuesCheckbox();
-        document.querySelector('#formSubjects').submit();
+        document.querySelector('#class').value = valueSelectClass;
+        document.querySelector('#formClassRooms').submit();
     })
 
 
@@ -102,7 +106,6 @@
     // Change Text on label select subjects
     function changeTextInLabel(select){
         const textOption = select.options[select.selectedIndex].text;
-        console.log(select.value)
         document.querySelector('#txt-class').textContent  = `Quais são sua matérias na turma ${textOption}`
     }
 </script>
