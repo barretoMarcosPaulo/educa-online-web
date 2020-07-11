@@ -1,70 +1,101 @@
 {% extends 'base.html' %}
-
+{% load widget_tweaks %}
 {% block body %}
-    <br>
-    <div class="dashboard">
- 
- 
-        <div class="box-cards col-md-10">
-        
-            <h3>Adicionar uma nova matéria</h3>
-        
-            <br>
-            <br>
-        
-            <form class="form-inline" method="POST">{% csrf_token %}
-            
-                <div class="form-group mx-sm-3 mb-2 col-md-10">
-                    <input 
-                        type="text" 
-                        name="subjects" 
-                        class="form-control col-md-12" 
-                        autofocus 
-                        id="subject_id" 
-                        placeholder="Ex.: Portugês, Matemática, História, Biologia etc ..."
-                    >
-                </div>
-                <button type="submit" class="btn btn-success mb-2">Adicionar</button>
-            
-            </form>
 
-            <small class="form-text text-muted" style="margin-left: 30px;">
-                Para adicionar várias de uma vez só digite os nomes seprando por vírgula.
-            </small>
+<br>
+<div class="dashboard">
 
 
-        </div>
-        
+    <div class="box-cards col-md-10">
+
+        <h3>Minhas Turmas Virtuais</h3>
+
         <br>
- 
-        <div class="box-cards col-md-10">
-    
-            <h3>Matérias que já foram adicionadas</h3>
+        <br>
 
-            <br>
-            <br>
-
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col" width="80%">Nome da Matéria</th>
-                        <th scope="col" class="text-center">Excluir</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for subject in subjects %}
-                    <tr>
-                        <td>{{subject.name}}</td>
-                        <td class="text-center">
-                            <a class="btn btn-danger" title="Remover esta matéria da minha escola">
-                                <i class="fas fa-trash-alt text-white"></i>
-                            </a>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-
+        {% if have_class_rooms %}
+        {% for class in teacher.classroom.all %}
+        <label class="btn btn-info btn-sm">
+            {{class}}
+        </label>
+        {% endfor %}
+        {% else %}
+        <div class="alert alert-danger text-center col-md-12">
+            <strong><i class="fas fa-exclamation-triangle"></i></strong>
+            Professor(a) {{request.user.get_short_name}},
+            você ainda não escolheu suas turmas virtuais, por favor selecione
+            abaixo as turmas onde você da aula.
         </div>
+        <small class="form-text text-muted" style="margin-left: 30px;">
+            <strong>Clique nas turmas em que você ministra.</strong>
+        </small>
+        {% endif %}
+
+
+
     </div>
+
+    <br>
+
+    <div class="box-cards col-md-10">
+
+        <h3>Selecione suas turmas e as matérias que você ministra nela</h3>
+
+        <br>
+        <br>
+
+        <div class="text-center col-md-12">
+            {% for class in class_suggestions %}
+            <div class="d-inline-block" style="margin-right: 2%;">
+                <input type="checkbox" id="{{class.id}}" value="{{class.id}}" class="checkbox">
+                {{class}}
+            </div>
+            {% endfor %}
+            <button class="btn btn-success btn-sm" id="btn-send">Ok, Enviar</button>
+        </div>
+
+        <form method="POST" class="d-none" id="formSubjects">
+            {% csrf_token %}
+            <input type="text" id="subjects" name="subjects">
+        </form>
+
+    </div>
+</div>
+
+
+<script>
+    // Send Subjects
+    document.querySelector('#btn-send').addEventListener('click', function () {
+        let valid = checkSelectSubjects();
+        if (!valid) {
+            alert('Selecione pelo menos uma matéria');
+        } else {
+            document.querySelector('#subjects').value = getValuesCheckbox();
+            document.querySelector('#formSubjects').submit();
+
+        }
+    })
+
+    function checkSelectSubjects() {
+        let oneChecked = false;
+        document.querySelectorAll('.checkbox').forEach((checkbox) => {
+            if (checkbox.checked) oneChecked = true;
+        })
+        return oneChecked;
+    }
+
+    function getValuesCheckbox() {
+        let listStrSubjects = "";
+
+        document.querySelectorAll('.checkbox').forEach((checkbox) => {
+            if (checkbox.checked) {
+                listStrSubjects += `,${checkbox.value}`
+            }
+        })
+
+        return listStrSubjects.substring(1);
+        ;
+    }
+
+</script>
 {% endblock %}
