@@ -3,6 +3,7 @@
 {% load widget_tweaks %}
 {% block subtitle %}| Área da Escola{% endblock %}
 {% block body %}
+
     <br>
     <div class="box-cards col-md-4" style="margin-top: 5%;">
         
@@ -21,6 +22,22 @@
             </div>
 
             <button type="submit" class="btn btn-primary col-md-12" id="btnRegister">Entrar</button>
+
+            <hr>
+
+            <div id="option-login" class=" col-md-12" style="display:flex; justify-content: center;">
+            
+                <a class="btn btn-warning btn-sm" href="{% url 'accounts:school_register' %}" style="width: 40%;color: #272525; margin-right: 10px; font-size: 14px;">
+                    Cadastrar Escola
+                </a>
+                
+                <a class="btn btn-warning btn-sm" href="{% url 'accounts:teacher_register' %}" style="width: 40%;color: #272525; font-size: 14px;" >
+                    Cadastrar Professor
+                </a>
+
+
+            </div>
+
         </form>
     
     </div>
