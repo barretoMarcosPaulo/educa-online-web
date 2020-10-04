@@ -11,6 +11,10 @@ class Index(TemplateView):
 class DashboardSchool(TemplateView):
     template_name = "school_dashboard.html"
 
+    def get_context_data(self, **kwargs):
+        context = super(DashboardSchool, self).get_context_data(**kwargs)
+        context['user_scholl'] = SchoolInstitution.objects.get(id=self.request.user.id)
+        return context
 
 class DashboardTeacher(TemplateView):
     template_name = "teacher_dashboard.html"

@@ -5,16 +5,14 @@
     <br>
     <div class="dashboard col-md-10">
         <div class="group-cards col-md-12 row">
-
             <a href="{% url 'school:list_teachers' %}" class="col-md-4 col-sm-12">
                 <div class="card">
                     <i class="fas fa-chalkboard-teacher"></i>
                     <br>
                     <label>Professores</label>
                 </div>
-            </a>    
-
-
+            </a>
+            
             <a href="#" class="col-md-4 col-sm-12">
                 <div class="card">
                     <i class="fas fa-child"></i>
@@ -31,7 +29,7 @@
                 </div>
             </a>
 
-            <a  href="{% url 'school:class_room' %}" class="col-md-4 col-sm-12">
+            <a href="{% url 'school:class_room' %}" class="col-md-4 col-sm-12">
                 <div class="card">
                     <i class="fas fa-th-large"></i>
                     <br>
@@ -54,6 +52,68 @@
                     <label>Provas</label>
                 </div>
             </a>
+
+            <a href="#" class="col-md-4 col-sm-12" data-toggle="modal" data-target="#viewKeys">
+                <div class="card">
+                    <i class="fas fa-key"></i>
+                    <br>
+                    <label>Código de acesso</label>
+                </div>
+            </a>
+
+            <!-- Modal -->
+            <div class="modal fade" id="viewKeys" tabindex="-1" aria-labelledby="viewKeys" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+
+                            <h5 class="modal-title">
+                                <i class="fas fa-check text-success"></i>
+                                Códigos Gerados
+                            </h5>
+
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Os códigos de acesso <i class="fas fa-key text-warning"></i> da sua escola.</p>
+
+                            <p class="alert alert-warning inline text-center">Código para os Alunos:
+                                <br>
+                                <strong>
+                                    <span class="cod_student">{{ user_scholl.cod_student }}</span>
+                                </strong>
+                            </p>
+
+
+                            <p>
+                                <i class="fas fa-exclamation-triangle text-danger"></i>
+                                Envie o código <span class="cod_student"></span> <strong>somente para seus ALUNOS</strong>
+                            </p>
+
+                            <p class="alert alert-warning inline text-center">Código para os professores:
+                                <br>
+                                <strong>
+                                    <span class="cod_teacher">{{ user_scholl.cod_scholl }}</span>
+                                </strong>
+                            </p>
+
+                            <p>
+                                <i class="fas fa-exclamation-triangle text-danger"></i>
+                                Envie o código <span class="cod_teacher"></span> <strong>somente para seus
+                                    PROFESSORES</strong>
+                                tenha muito cuidado ao compartilhar. A pessoa com este código terá contato com seus alunos,
+                                portanto tenha certeza com quem compartilhar.
+                            </p>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Entendi</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
 
