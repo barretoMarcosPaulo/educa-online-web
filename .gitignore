@@ -1,6 +1,5 @@
 .env
 db.sqlite3
-**/migrations/*
 **/_pycache_/*
 *.pyc
 *.pyo
