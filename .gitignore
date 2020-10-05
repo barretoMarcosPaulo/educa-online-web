@@ -4,3 +4,5 @@ db.sqlite3
 **/_pycache_/*
 *.pyc
 *.pyo
+__pycache__/
+venv/
